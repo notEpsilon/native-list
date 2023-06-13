@@ -8,7 +8,7 @@
     </p>
 </div>
 
-<p align="center">simple full-stack react-native project for an internship assessment and learning purposes</p>
+<p align="center">native-list is a simple full-stack react-native project for an internship assessment and learning purposes</p>
 
 ## This Repo
 
