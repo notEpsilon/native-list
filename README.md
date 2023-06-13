@@ -1,8 +1,8 @@
 <div style="text-align: center; margin-bottom: 30px">
     <p align="center">
         <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="./docs/black-logo.svg">
-            <source media="(prefers-color-scheme: light)" srcset="./docs/white-logo.svg">
+            <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/black-logo.svg">
+            <source media="(prefers-color-scheme: light)" srcset="./docs/assets/white-logo.svg">
             <img alt="fallback_img" src="./docs/black-logo.svg">
         </picture>
     </p>
