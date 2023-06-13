@@ -1,4 +1,4 @@
-<div style="text-align: center; margin-top: 100px; padding-top: 50px;">
+<div style="text-align: center; margin: 100px">
     <p align="center">
         <picture>
             <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/black-logo.svg">
