@@ -13,7 +13,7 @@ datasource db {
 model User {
   id       Int    @id @default(autoincrement())
   email    String @unique @db.VarChar(255)
-  password String @db.VarChar(64) // 64 MAX FOR HASHING PURPOSES
+  password String @db.Text
 
   todos Todo[]
 

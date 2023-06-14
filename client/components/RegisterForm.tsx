@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Link } from "@react-navigation/native";
+import { Link, useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 import { COLORS } from "../colors";
 import Input from "./Input";
@@ -15,6 +15,7 @@ import InputError from "./InputError";
 import InputGroup from "./InputGroup";
 import Spinner from "./Spinner";
 import { GestureResponderEvent } from "react-native";
+import { axs } from "../api/axios-client";
 
 const registerSchema = yup.object({
   email: yup
@@ -35,6 +36,8 @@ const registerSchema = yup.object({
 type RegisterInfo = yup.InferType<typeof registerSchema>;
 
 const RegisterForm: React.FC = () => {
+  const navigation = useNavigation<any>();
+
   const formik = useFormik<RegisterInfo>({
     initialValues: {
       email: "",
@@ -44,13 +47,16 @@ const RegisterForm: React.FC = () => {
     validationSchema: registerSchema,
     onSubmit: async (values, helpers) => {
       Keyboard.dismiss();
-      await new Promise<void>((resolve, reject) => {
-        setTimeout(() => {
-          helpers.resetForm();
-          console.log(values);
-          resolve();
-        }, 4000);
-      });
+      try {
+        const res = await axs.post("/auth/register", JSON.stringify(values), {
+          headers: { "Content-Type": "application/json" },
+        });
+        console.log(res.data);
+        helpers.resetForm();
+        navigation.navigate("Login");
+      } catch (err) {
+        console.error((err as any).response.data);
+      }
     },
   });
 

@@ -9,11 +9,10 @@ dotenv.config();
 const app = express();
 
 app.use(helmet);
-app.use(express.json());
 app.use(cors);
+app.use(express.json());
 
 app.use("/api/v1/auth", authRoutes);
 
 const __port__ = process.env.PORT || 5000;
-
-app.listen(__port__, () => console.log(`listening on port ${__port__}...`));
+app.listen(__port__, () => console.log(`listening on ${__port__}...`));
