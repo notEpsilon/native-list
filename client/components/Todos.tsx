@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
-  Text,
   ScrollView,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -13,13 +12,33 @@ import { COLORS } from "../colors";
 import Input from "./Input";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Todo from "./Todo";
+import { TodoType } from "../types/todo";
+import { axs } from "../api/axios-client";
 
 interface TodosProps {
-  userToken: string;
+  owner: number;
+  todos: TodoType[];
+  refetch: (userId: number) => Promise<void>;
 }
 
-const Todos: React.FC<TodosProps> = ({ userToken }) => {
+const Todos: React.FC<TodosProps> = ({ todos, owner, refetch }) => {
   const height = useHeaderHeight();
+
+  const [todoText, setTodoText] = useState<string>("");
+
+  const handleAddTodo = async () => {
+    if (!todoText || (todoText && todoText.length === 0)) {
+      return;
+    }
+
+    try {
+      const resp = await axs.post("/todos", { title: todoText, userId: owner });
+      setTodoText("");
+      await refetch(owner);
+    } catch (err) {
+      console.error((err as any).response.data);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -30,16 +49,22 @@ const Todos: React.FC<TodosProps> = ({ userToken }) => {
     >
       <View style={styles.wrapper}>
         <Container>
-          <ScrollView style={styles.todosContainer}>
-            {Array(400)
-              .fill(0)
-              .map((e, i) => (
-                <Todo key={i} todo={{ title: `Todo #${i + 1}`, done: false }} />
-              ))}
+          <ScrollView
+            style={styles.todosContainer}
+            keyboardShouldPersistTaps="handled"
+          >
+            {todos.map((todo) => (
+              <Todo key={todo.id} todo={todo} refetch={refetch} />
+            ))}
           </ScrollView>
           <View style={styles.inputWrapper}>
-            <Input style={styles.input} placeholder="Add todo..." />
-            <TouchableOpacity style={styles.send}>
+            <Input
+              style={styles.input}
+              placeholder="Add todo..."
+              value={todoText}
+              onChangeText={setTodoText}
+            />
+            <TouchableOpacity style={styles.send} onPress={handleAddTodo}>
               <Icon name="plus-box-outline" style={styles.sendIcon} />
             </TouchableOpacity>
           </View>

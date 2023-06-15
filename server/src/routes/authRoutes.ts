@@ -9,6 +9,6 @@ router.post("/login", authController.login);
 
 router.post("/verify_token", authController.verifyToken);
 
-router.post("/email_from_token", authController.emailFromValidToken);
+router.post("/safe_info_from_token", authController.safeInfoFromValidToken);
 
 export default router;

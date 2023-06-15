@@ -1,20 +1,20 @@
 import React from "react";
 import { Switch } from "react-native";
-import { useToggle } from "../hooks/hooks";
 import { COLORS } from "../colors";
 
-interface TogglerProps {}
+interface TogglerProps {
+  value?: boolean | undefined;
+  onChange?: ((value: boolean) => void | Promise<void>) | null;
+}
 
-const Toggler: React.FC<TogglerProps> = () => {
-  const [isEnabled, toggleSwitch] = useToggle(false);
-
+const Toggler: React.FC<TogglerProps> = ({ value, onChange }) => {
   return (
     <Switch
       trackColor={{ false: "#767577", true: "#4ade80" }}
-      thumbColor={isEnabled ? "f5dd4b" : "#f4f3f4"}
+      thumbColor={value ? "f5dd4b" : "#f4f3f4"}
       ios_backgroundColor={COLORS.lightGrey}
-      onValueChange={toggleSwitch}
-      value={isEnabled}
+      onValueChange={onChange}
+      value={value}
     />
   );
 };

@@ -88,7 +88,7 @@ const verifyToken = async (req: Request, res: Response) => {
   }
 };
 
-const emailFromValidToken = async (req: Request, res: Response) => {
+const safeInfoFromValidToken = async (req: Request, res: Response) => {
   const { token }: { token: string } = req.body;
 
   try {
@@ -105,7 +105,7 @@ const emailFromValidToken = async (req: Request, res: Response) => {
       throw new Error("Unexpected error");
     }
 
-    res.status(200).json({ email: user.email });
+    res.status(200).json({ id: decoded.userId, email: user.email });
   } catch (err) {
     res.status(500).json({ err });
   }
@@ -115,5 +115,5 @@ export const authController = {
   login,
   register,
   verifyToken,
-  emailFromValidToken,
+  safeInfoFromValidToken,
 };

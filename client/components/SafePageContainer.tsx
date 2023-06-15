@@ -16,7 +16,10 @@ const SafePageContainer: React.FC<SafePageContainerProps> = ({
 }) => {
   return (
     <SafeAreaView style={[style, { flex: 1 }]} {...props}>
-      <ScrollView contentContainerStyle={[{ flex: 1 }, contentContainerStyle]}>
+      <ScrollView
+        contentContainerStyle={[{ flex: 1 }, contentContainerStyle]}
+        keyboardShouldPersistTaps="handled"
+      >
         {children}
       </ScrollView>
     </SafeAreaView>
