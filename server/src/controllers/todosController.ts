@@ -50,4 +50,28 @@ const createTodo = async (req: Request, res: Response) => {
   }
 };
 
-export const todosController = { getUserTodos, createTodo, deleteById };
+const toggleTodo = async (req: Request, res: Response) => {
+  const { id, currentState }: { id: number; currentState: boolean } = req.body;
+
+  try {
+    const newState = !currentState;
+    await prisma.todo.update({
+      where: {
+        id,
+      },
+      data: {
+        done: newState,
+      },
+    });
+    res.status(200).json({ newState });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+};
+
+export const todosController = {
+  getUserTodos,
+  createTodo,
+  toggleTodo,
+  deleteById,
+};

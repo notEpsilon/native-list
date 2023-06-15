@@ -9,4 +9,6 @@ router.get("/:id", todosController.getUserTodos);
 
 router.post("/", todosController.createTodo);
 
+router.post("/toggle", todosController.toggleTodo);
+
 export default router;

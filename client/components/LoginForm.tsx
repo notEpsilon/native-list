@@ -1,4 +1,4 @@
-import { Link, useNavigation, CommonActions } from "@react-navigation/native";
+import { Link, useNavigation } from "@react-navigation/native";
 import { useFormik } from "formik";
 import React from "react";
 import {
@@ -18,6 +18,7 @@ import InputGroup from "./InputGroup";
 import Spinner from "./Spinner";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { cleanTodosRedirect } from "../actions/redirects.actions";
+import Toast from "react-native-toast-message";
 
 const loginSchema = yup.object({
   email: yup
@@ -54,7 +55,13 @@ const LoginForm: React.FC = () => {
         helpers.resetForm();
         cleanTodosRedirect(navigation);
       } catch (err) {
-        console.error((err as any).response.data);
+        Toast.show({
+          type: "error",
+          text1: "Bad credentials",
+          text2: (err as any).response.data.err,
+          position: "top",
+          visibilityTime: 3000,
+        });
       }
     },
   });

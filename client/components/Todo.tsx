@@ -5,7 +5,7 @@ import { COLORS } from "../colors";
 import Container from "./Container";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Toggler from "./Toggler";
-import { useToggle } from "../hooks/hooks";
+import { useTodoToggle } from "../hooks/hooks";
 import { axs } from "../api/axios-client";
 
 interface TodoProps {
@@ -14,7 +14,7 @@ interface TodoProps {
 }
 
 const Todo: React.FC<TodoProps> = ({ todo, refetch }) => {
-  const [isEnabled, toggleSwitch] = useToggle(false);
+  const [isEnabled, toggleSwitch] = useTodoToggle(todo.done, todo.id);
 
   const showDeleteConfirmation = () => {
     Alert.alert(
