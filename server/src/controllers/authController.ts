@@ -88,4 +88,32 @@ const verifyToken = async (req: Request, res: Response) => {
   }
 };
 
-export const authController = { login, register, verifyToken };
+const emailFromValidToken = async (req: Request, res: Response) => {
+  const { token }: { token: string } = req.body;
+
+  try {
+    const decoded = jwt.decode(token) as { userId: number };
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: decoded.userId,
+      },
+    });
+
+    if (!user) {
+      // this should never happen
+      throw new Error("Unexpected error");
+    }
+
+    res.status(200).json({ email: user.email });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+};
+
+export const authController = {
+  login,
+  register,
+  verifyToken,
+  emailFromValidToken,
+};

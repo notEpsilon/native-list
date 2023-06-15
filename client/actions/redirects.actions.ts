@@ -10,3 +10,12 @@ export const cleanTodosRedirect = (nav: any) => {
 
   nav.dispatch(resetAction);
 };
+
+export const cleanLoginRedirect = (nav: any) => {
+  const resetAction = CommonActions.reset({
+    index: 0,
+    routes: [{ name: "Login" }],
+  });
+
+  nav.dispatch(resetAction);
+};
