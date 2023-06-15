@@ -8,4 +8,5 @@ export const COLORS = Object.freeze({
   red: "#ef4444",
   mainFaded: "rgba(59, 130, 246, 0.5)",
   blackFaded: "rgba(0, 0, 0, 0.42)",
+  pageBackground: "#f8f9fa",
 });

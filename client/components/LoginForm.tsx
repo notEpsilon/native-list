@@ -1,4 +1,4 @@
-import { Link } from "@react-navigation/native";
+import { Link, useNavigation } from "@react-navigation/native";
 import { useFormik } from "formik";
 import React from "react";
 import {
@@ -10,11 +10,13 @@ import {
   View,
 } from "react-native";
 import * as yup from "yup";
+import { axs } from "../api/axios-client";
 import { COLORS } from "../colors";
 import Input from "./Input";
 import InputError from "./InputError";
 import InputGroup from "./InputGroup";
 import Spinner from "./Spinner";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const loginSchema = yup.object({
   email: yup
@@ -29,8 +31,11 @@ const loginSchema = yup.object({
 });
 
 type LoginInfo = yup.InferType<typeof loginSchema>;
+type LoginResponse = { access_token: string };
 
 const LoginForm: React.FC = () => {
+  const navigation = useNavigation<any>();
+
   const formik = useFormik<LoginInfo>({
     initialValues: {
       email: "",
@@ -39,13 +44,17 @@ const LoginForm: React.FC = () => {
     validationSchema: loginSchema,
     onSubmit: async (values, helpers) => {
       Keyboard.dismiss();
-      await new Promise<void>((resolve, reject) => {
-        setTimeout(() => {
-          helpers.resetForm();
-          console.log(values);
-          resolve();
-        }, 4000);
-      });
+      try {
+        const resp = await axs.post<LoginResponse>("/auth/login", {
+          ...values,
+        });
+        const accessToken = resp.data.access_token;
+        await AsyncStorage.setItem("access_token", accessToken);
+        helpers.resetForm();
+        navigation.navigate("Todos");
+      } catch (err) {
+        console.error((err as any).response.data);
+      }
     },
   });
 

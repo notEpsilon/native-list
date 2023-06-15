@@ -48,10 +48,9 @@ const RegisterForm: React.FC = () => {
     onSubmit: async (values, helpers) => {
       Keyboard.dismiss();
       try {
-        const res = await axs.post("/auth/register", JSON.stringify(values), {
+        await axs.post("/auth/register", JSON.stringify(values), {
           headers: { "Content-Type": "application/json" },
         });
-        console.log(res.data);
         helpers.resetForm();
         navigation.navigate("Login");
       } catch (err) {
