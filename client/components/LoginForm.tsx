@@ -1,4 +1,4 @@
-import { Link, useNavigation } from "@react-navigation/native";
+import { Link, useNavigation, CommonActions } from "@react-navigation/native";
 import { useFormik } from "formik";
 import React from "react";
 import {
@@ -17,6 +17,7 @@ import InputError from "./InputError";
 import InputGroup from "./InputGroup";
 import Spinner from "./Spinner";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { cleanTodosRedirect } from "../actions/redirects.actions";
 
 const loginSchema = yup.object({
   email: yup
@@ -51,7 +52,7 @@ const LoginForm: React.FC = () => {
         const accessToken = resp.data.access_token;
         await AsyncStorage.setItem("access_token", accessToken);
         helpers.resetForm();
-        navigation.navigate("Todos");
+        cleanTodosRedirect(navigation);
       } catch (err) {
         console.error((err as any).response.data);
       }
