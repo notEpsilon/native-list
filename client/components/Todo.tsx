@@ -1,8 +1,10 @@
 import React from "react";
 import { TodoType } from "../types/todo";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS } from "../colors";
 import Container from "./Container";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Toggler from "./Toggler";
 
 interface TodoProps {
   todo: TodoType;
@@ -12,7 +14,12 @@ const Todo: React.FC<TodoProps> = ({ todo }) => {
   return (
     <View style={styles.wrapper}>
       <Container style={styles.container}>
-        <Text>{todo.title}</Text>
+        <View>
+          <Text>{todo.title}</Text>
+        </View>
+        <View>
+          <Toggler />
+        </View>
       </Container>
     </View>
   );
@@ -26,6 +33,9 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingVertical: 12,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 

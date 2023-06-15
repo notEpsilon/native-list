@@ -9,7 +9,6 @@ import SafePageContainer, {
   SafePageContainerProps,
 } from "../components/SafePageContainer";
 import Todos from "../components/Todos";
-import { COLORS } from "../colors";
 
 type TodoScreenProps = SafePageContainerProps;
 
