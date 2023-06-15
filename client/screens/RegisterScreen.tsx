@@ -9,11 +9,15 @@ import { __logo_uri__ } from "../constants";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { axs } from "../api/axios-client";
+import { useNavigation } from "@react-navigation/native";
+import { cleanTodosRedirect } from "../actions/redirects.actions";
 
 type RegisterScreenProps = SafePageContainerProps;
 type VerifyResponse = { valid: boolean };
 
 const RegisterScreen: React.FC<RegisterScreenProps> = ({ ...props }) => {
+  const navigation = useNavigation<any>();
+
   useEffect(() => {
     (async () => {
       const token = await AsyncStorage.getItem("access_token");
@@ -27,8 +31,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ ...props }) => {
         if (!resp.data.valid) {
           return;
         }
-        console.log("[CLIENT]: Valid Token");
-        // redirect to todos page
+        cleanTodosRedirect(navigation);
       } catch (err) {
         console.error((err as any).response.data);
       }

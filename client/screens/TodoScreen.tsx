@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text } from "react-native";
 import Container from "../components/Container";
 import SafePageContainer, {
@@ -8,6 +8,8 @@ import SafePageContainer, {
 type TodoScreenProps = SafePageContainerProps;
 
 const TodoScreen: React.FC<TodoScreenProps> = ({ ...props }) => {
+  useEffect(() => {}, []);
+
   return (
     <SafePageContainer {...props}>
       <Container center>
