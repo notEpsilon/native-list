@@ -6,10 +6,35 @@ import SafePageContainer, {
   SafePageContainerProps,
 } from "../components/SafePageContainer";
 import { __logo_uri__ } from "../constants";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { axs } from "../api/axios-client";
 
 type RegisterScreenProps = SafePageContainerProps;
+type VerifyResponse = { valid: boolean };
 
 const RegisterScreen: React.FC<RegisterScreenProps> = ({ ...props }) => {
+  useEffect(() => {
+    (async () => {
+      const token = await AsyncStorage.getItem("access_token");
+      if (!token) {
+        return;
+      }
+      try {
+        const resp = await axs.post<VerifyResponse>("/auth/verify_token", {
+          token,
+        });
+        if (!resp.data.valid) {
+          return;
+        }
+        console.log("[CLIENT]: Valid Token");
+        // redirect to todos page
+      } catch (err) {
+        console.error((err as any).response.data);
+      }
+    })();
+  }, []);
+
   return (
     <SafePageContainer {...props}>
       <Container>

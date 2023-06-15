@@ -73,4 +73,19 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-export const authController = { login, register };
+const verifyToken = async (req: Request, res: Response) => {
+  const { token }: { token: string } = req.body;
+
+  try {
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+    res.status(200).json({ valid: true });
+  } catch (err) {
+    if ((err as any).name === "TokenExpiredError") {
+      res.status(200).json({ valid: false });
+    } else {
+      res.status(500).json({ err });
+    }
+  }
+};
+
+export const authController = { login, register, verifyToken };
