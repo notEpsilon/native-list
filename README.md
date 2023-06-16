@@ -24,3 +24,9 @@ Root Directories
 | `/docs`   | Documentation assests                                |
 | `/client` | `react-native` & `typescript` cross-platform project |
 | `/server` | `express.js` project backend                         |
+
+## Demo
+
+<video width="320" height="240" controls>
+    <source src="docs/assets/demo.mp4" type="video/mp4">
+</video>
