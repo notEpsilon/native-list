@@ -27,5 +27,4 @@ Root Directories
 
 ## Demo
 
-![](./docs/assets/demo.mp4)
-
+![Demo Video](./docs/assets/demo.mp4)
