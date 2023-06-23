@@ -27,4 +27,4 @@ Root Directories
 
 ## Demo
 
-Download the demo video from [here](https://cdn-cf-east.streamable.com/video/mp4/7ru9up.mp4?Expires=1687145040&Signature=hyvphlwjpPqlPZmzeklqdinVaxKnzJ63-u4uYO5dNf3CXwD9cpGaF0vXiOhg32CaUuIn8Dm0zC4y5eBc2n3BfqLuOsg0iZjXg3SzeP1BKURWVXZ5fyyLlUDvDZbJIG4tmAyY0r5PzCy6dAp2y2vv6y8MnAsJf3X3btmKJamc-TPFvbDFl8yF4bn7Go5fY-g50oU-u1vES1zV069lMGOjgA-7LHJph7h4gDwQS5ecvJbCQiroLNMAkZBei8NKfZqLt-nOykYnRy7fU5~-2STxv23LRC43LH9ewMFSfS7FZy0Cy-VFdGNP1IuEzppIgdsIoNWDcUcZLxkijh4PFBiWYg__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ), or watch online from [this link](https://drive.google.com/file/d/1kQLQMFnwHI34DnKtmUUKT6zE7CimDBij/view?usp=sharing) (adjust the quality of the video to your needs, **don't open it in incognito mode**).
+Watch the demo online from [this link](https://drive.google.com/file/d/1kQLQMFnwHI34DnKtmUUKT6zE7CimDBij/view?usp=sharing) (adjust the quality of the video to your needs, **don't open it in incognito mode**).
